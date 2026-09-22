@@ -1,8 +1,9 @@
 # Evolution — Academia
 
-Template de site institucional para academia premium, em **React + Vite + TypeScript**.
-Identidade visual: preto azulado, texturas de rocha e névoa, acento lavanda e tipografia
-grotesca em caixa alta com wordmark gigante sangrando na borda.
+Landing page institucional para uma academia premium no Rio de Janeiro, construída em
+**React + Vite + TypeScript**. Identidade visual em preto azulado, texturas de rocha e
+névoa, acento lavanda e tipografia grotesca em caixa alta com wordmark gigante sangrando
+na borda.
 
 ---
 
@@ -15,7 +16,7 @@ npm run build    # gera a pasta dist/ pronta para publicar
 npm run preview  # serve a build local para conferência
 ```
 
-Node 18 ou superior.
+Requer Node 18 ou superior.
 
 ---
 
@@ -41,7 +42,7 @@ Node 18 ou superior.
 ```
 src/
 ├─ components/
-│  ├─ layout/     Navbar (menu pílula + sheet mobile), Footer
+│  ├─ layout/     Navbar (menu pílula desktop + sheet fullscreen mobile), Footer
 │  ├─ sections/   Heroi, Manifesto, Numeros, Metodo, Modalidades,
 │  │              Professores, Horarios, Outdoor, Depoimentos,
 │  │              Planos, Duvidas, Visita
@@ -57,9 +58,20 @@ academia, normalmente basta editar esse arquivo e `src/lib/images.ts`.
 
 ---
 
+## Navegação e agendamento de visita
+
+- **Desktop**: menu em pílula fixo no topo, com item ativo sincronizado por
+  `IntersectionObserver` conforme a rolagem.
+- **Mobile**: botão de menu abre um sheet fullscreen com os mesmos links em tipografia
+  grande, e trava a rolagem do body enquanto está aberto.
+- O CTA **"Agendar visita"** aparece na navbar (desktop e mobile) e na seção `#visita`,
+  abrindo um `mailto:` direto para o e-mail configurado em `src/data/site.ts`.
+
+---
+
 ## Imagens
 
-São duas camadas que trabalham juntas:
+Duas camadas trabalham juntas:
 
 1. **Texturas** (`public/img/*.jpg`) — rocha, névoa, atmosfera, metal escovado e grão de
    filme, geradas proceduralmente para este projeto. Entram como fundo de seções e cartões
@@ -89,8 +101,10 @@ lugar — nenhum bloco quebra por causa de uma URL fora do ar.
 - `prefers-reduced-motion` desliga rolagem suave, parallax, contadores e revelações.
 - Tabela de horários com `<th scope="row">` e legenda.
 - Imagens com `loading="lazy"` (exceto o herói, com `fetchPriority="high"`), `preconnect`
-  para fontes e CDN de imagens, e JS separado em três blocos (app, motion, carrossel).
-- Layout responsivo de 360 px a telas largas, com margem lateral fluida (`px-gut`).
+  para fontes e CDN de imagens, e JS separado em blocos (app, motion, carrossel) para
+  reduzir o bundle inicial.
+- Layout responsivo de 360 px a telas largas, com margem lateral fluida (`px-gut`) e
+  escala tipográfica em `clamp()`.
 
 ---
 
@@ -108,3 +122,11 @@ haze: '#C2CADE',
 
 **Escala de títulos** — `theme.extend.fontSize`: `d1`, `d2`, `d3` e `mark` (wordmark),
 todas em `clamp()`, então o tipo escala sozinho entre celular e desktop.
+
+---
+
+## Convenção de commits
+
+Este repositório segue [Conventional Commits](https://www.conventionalcommits.org/):
+`feat`, `fix`, `style`, `docs`, `refactor`, `perf`, `chore`, entre outros, sempre com um
+escopo claro do que mudou.
