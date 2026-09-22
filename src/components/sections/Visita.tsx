@@ -30,8 +30,8 @@ export function Visita() {
 
     setErro('')
 
-    const assunto = `Agendar visita — ${nome}`
-    const corpo = [
+    const texto = [
+      `Olá! Quero agendar uma visita na Evolution.`,
       `Nome: ${nome}`,
       `Contato: ${contato}`,
       `Dia preferido: ${dia}`,
@@ -41,7 +41,7 @@ export function Visita() {
       .filter(Boolean)
       .join('\n')
 
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`
+    window.open(`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener')
     setEnviado(true)
   }
 
@@ -160,7 +160,7 @@ export function Visita() {
 
             {enviado && !erro && (
               <p role="status" className="text-micro font-medium text-lav">
-                Seu app de e-mail deve abrir com a mensagem pronta. Se não abrir, fale direto pelo{' '}
+                O WhatsApp deve abrir com a mensagem pronta. Se não abrir, fale direto pelo{' '}
                 {site.telefone}.
               </p>
             )}
@@ -169,7 +169,7 @@ export function Visita() {
               type="submit"
               className="mt-2 inline-flex items-center justify-center gap-2.5 rounded-full border border-transparent bg-bone px-6 py-3.5 text-micro font-semibold uppercase text-void transition-colors duration-300 hover:bg-lav"
             >
-              Agendar minha visita
+              Agendar pelo WhatsApp
             </button>
           </form>
         </Revelar>
