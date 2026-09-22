@@ -5,6 +5,7 @@ export const site = {
   descricao: 'Academia e espaço de treino privado — Ipanema, Rio de Janeiro',
   endereco: 'Rua Visconde de Pirajá, 1200 — Ipanema, Rio de Janeiro',
   telefone: '+55 21 4000-0190',
+  whatsapp: '5521986863072',
   email: 'contato@evolution.com.br',
   instagram: '@evolution.treino',
 } as const
