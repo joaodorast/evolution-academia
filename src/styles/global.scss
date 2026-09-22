@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- tokens ---------- */
+:root {
+  --void: #04050a;
+  --bone: #edf0f7;
+  --lav: #8e9fda;
+  --hair: rgba(226, 232, 246, 0.1);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-hair;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  body {
+    @apply bg-void text-bone font-sans antialiased;
+    font-size: clamp(13.5px, 1.02vw, 15.5px);
+    line-height: 1.55;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-extrabold uppercase;
+    text-wrap: balance;
+    margin: 0;
+  }
+  ::selection {
+    background: var(--lav);
+    color: #04050a;
+  }
+  :focus-visible {
+    outline: 2px solid var(--lav);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* moldura padrão de página */
+  .frame {
+    @apply mx-auto w-full max-w-frame px-gut;
+  }
+  .rule {
+    @apply h-px w-full bg-hair;
+  }
+
+  /* grão de filme sobre toda a página */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0.42;
+    mix-blend-mode: overlay;
+    background: url('/img/textura-grao.png') repeat;
+  }
+
+  /* wordmark gigante com degradê, usado no herói */
+  .wordmark {
+    @apply font-display font-black uppercase text-mark whitespace-nowrap;
+    background: linear-gradient(180deg, #f2f5fb 6%, #98a4c6 44%, #171c2a 96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* wordmark vazado, usado no rodapé */
+  .wordmark-outline {
+    @apply font-display font-black uppercase text-mark whitespace-nowrap text-center;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(199, 208, 232, 0.17);
+  }
+
+  /* lajota de pedra usada nas laterais e atrás das fotos */
+  .textura-pedra {
+    background: url('/img/textura-pedra.jpg') center / cover;
+  }
+  .textura-pedra-larga {
+    background: url('/img/textura-pedra-larga.jpg') center / cover;
+  }
+  .textura-metal {
+    background: url('/img/textura-metal.jpg') center / cover;
+  }
+  /* brilho atmosférico, sempre em screen sobre o preto */
+  .textura-atmosfera {
+    background: url('/img/textura-atmosfera.jpg') center / cover;
+    mix-blend-mode: screen;
+  }
+  .textura-nevoa {
+    background: url('/img/textura-nevoa.jpg') center / cover;
+    mix-blend-mode: screen;
+  }
+
+  /* imagem em preto e branco com leve brilho azulado */
+  .photo {
+    @apply object-cover;
+    filter: grayscale(1) brightness(0.92) contrast(1.08);
+  }
+  .photo-tint {
+    @apply absolute inset-0;
+    background:
+      radial-gradient(70% 55% at 60% 25%, rgba(142, 159, 218, 0.28), transparent 70%),
+      linear-gradient(180deg, transparent 30%, rgba(4, 5, 10, 0.88) 94%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
